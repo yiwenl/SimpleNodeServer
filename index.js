@@ -50,9 +50,22 @@ const receiver = new OscReceiver();
 receiver.bind(PORT_LISTEN_OSC);
 
 receiver.on('/mousemove/1', function(x, y) { 
-	console.log(x, y)
+  io.emit('onmousemove', {x, y});
 })
 
 
 // logging
 log(`Start Server, WebSocket at port: ${PORT_SOCKET}, OSC at port : ${PORT_LISTEN_OSC}`);
+
+
+// WebSocket Client side example
+/*
+
+const io = require('socket.io-client')
+const socket = io('http://localhost:9876')
+
+socket.on('onmousemove', e => {
+	console.log('on mousemove', e)
+})
+
+*/
